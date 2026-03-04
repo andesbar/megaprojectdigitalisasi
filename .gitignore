@@ -1,0 +1,14 @@
+# Jangan upload data database PostgreSQL
+data_db/
+dbpostresql/
+
+# Jangan upload sertifikat SSL lokal (mkcert)
+*.pem
+
+# Jangan upload file exe mkcert
+mkcert.exe
+mkcert-v1.4.4-windows-amd64.exe
+
+# File log atau temp
+*.log
+.DS_Store

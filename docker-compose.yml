@@ -1,0 +1,31 @@
+services:
+  # DATABASE (Postgres)
+  db-desa:
+    image: postgres:latest
+    container_name: postgres_container_megaproject
+    restart: always
+    environment:
+      POSTGRES_USER: mega_admin
+      POSTGRES_PASSWORD: Megadmin
+      POSTGRES_DB: mega_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data_db:/var/lib/postgresql
+
+  # WEB SERVER (PHP)
+  web-desa:
+    build: .
+    container_name: php_container_megaproject
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443" # Pintu baru untuk HTTPS
+    volumes:
+      - .:/var/www/html
+      - ./docker-config/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      # Memasukkan sertifikat ke dalam folder SSL di Apache
+      - ./localhost+3.pem:/etc/apache2/ssl/cert.pem
+      - ./localhost+3-key.pem:/etc/apache2/ssl/key.pem
+    depends_on:
+      - db-desa
