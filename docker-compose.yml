@@ -12,6 +12,7 @@ services:
       - "5432:5432"
     volumes:
       - ./data_db:/var/lib/postgresql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   # WEB SERVER (PHP)
   web-desa:
